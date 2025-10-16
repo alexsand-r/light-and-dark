@@ -1,0 +1,106 @@
+:root {
+  --color-bg: #fff;
+  --color-text: #222;
+  --box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+
+  /*  */
+  --font-main-roboto: "Roboto", sans-serif;
+  --font-weight-normal: 400;
+  --font-size: 18px;
+
+  /* перемикач */
+  --color-switcher-bg: #222; /* темний перемикач */
+  --color-switcher-thumb: #fff; /* світла кнопка */
+  --transition-duration: 0.3s;
+}
+
+.theme-dark {
+  --color-text: #eee;
+  --color-bg: #555353;
+  --box-shadow: 0 3px 6px rgba(233, 233, 233, 0.15);
+
+  /* перемикач */
+  --color-switcher-bg: #ddd; /* світлий перемикач */
+  --color-switcher-thumb: #222; /* темна "кнопка" */
+}
+
+body {
+  font-family: var(--font-main-roboto);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size);
+  /*  */
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: color var(--transition-duration),
+    background-color var(--transition-duration);
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+  /* или 100vh*/
+  overflow: hidden;
+  /* overflow: clip;   с clip работает позишен стик*/
+  display: flex;
+  /*  ----  делаем флекс  */
+  flex-direction: column;
+  /* переводим флекс в вертикаль - и добавляем в main " flex: 1 1 auto; " опускаем подвал   */
+}
+
+.page {
+  flex: 1 1 auto;
+  /* прибиваем футер к низу */
+}
+
+[class*="__container"] {
+  max-width: 1050px;
+  /*  добавляем 30 пикселей  два по 15 к основному размеру из за пад 15 рх*/
+  margin: 0 auto;
+  padding: 0 15px;
+  /* -- добавляем 15 пик чтобы не прилипал контент - адаптация  */
+}
+
+.header {
+  box-shadow: var(--box-shadow);
+}
+
+.header__body {
+  padding-block: 25px;
+  font-size: 24px;
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  align-items: center;
+}
+
+.page__body {
+  padding-block: 20px;
+}
+
+.theme-switcher {
+  width: 60px;
+  height: 30px;
+  background-color: var(--color-switcher-bg);
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color var(--transition-duration) ease;
+}
+
+/* сам кружечок */
+.theme-switcher::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-switcher-thumb);
+  transition: left var(--transition-duration) ease,
+    background-color var(--transition-duration) ease;
+}
+
+/* коли активний (зміщуємо вправо) */
+.theme-switcher--right::after {
+  left: 33px;
+}
